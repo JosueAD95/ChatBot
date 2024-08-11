@@ -1,0 +1,27 @@
+package view 
+
+templ Index(){
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="https://unpkg.com/htmx.org@1.9.6"></script><!--HTMX-->
+        <!--<script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script> HTMX Websocket-->
+        <link href="/dist/output.css" rel="stylesheet"/><!--Tailwind-->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Chatbot</title>
+    </head>
+    <body>
+        <!-- Dummy content -->
+        <div class="p-10">
+            <h1 class="text-4xl italic">KindaCode.com</h1>
+            <h3 class="text-xl">Some content here</h3>
+        </div>
+
+        @Chat()
+        
+    </body>
+    </html>
+}
