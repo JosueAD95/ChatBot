@@ -10,7 +10,7 @@ import "context"
 import "io"
 import "bytes"
 
-func Chat() templ.Component {
+func Message(message string, answer string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -23,7 +23,81 @@ func Chat() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"fixed bottom-0 right-10 mb-4 mr-4\"><button id=\"open-chat\" title=\"Contact Sale\" class=\"fixed z-90 bottom-10 right-8 bg-blue-600 w-20 h-20 rounded-full drop-shadow-lg\n            flex justify-center items-center text-white text-4xl hover:bg-blue-700 hover:drop-shadow-2xl\n            hover:animate-bounce duration-300\"><svg class=\"w-10 h-10 lg:w-12 lg:h-12 xl:w-16 xl:h-16\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z\" clip-rule=\"evenodd\"></path></svg></button></div><div id=\"chat-container\" class=\"hidden fixed bottom-16 right-4 w-96\"><div class=\"bg-white shadow-md rounded-lg max-w-lg w-full\"><div class=\"p-4 border-b bg-blue-500 text-white rounded-t-lg flex justify-between items-center\"><p class=\"text-lg font-semibold\">Gazu Bot</p><button id=\"close-chat\" class=\"text-gray-300 hover:text-gray-400 focus:outline-none focus:text-gray-400\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"w-6 h-6\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M6 18L18 6M6 6l12 12\"></path></svg></button></div><div id=\"chatbox\" class=\"p-4 h-80 overflow-y-auto\"><!-- Chat messages--><div class=\"mb-2\"><p class=\"bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block\">Hello, I am ChatBot named Gazu!<br>Please ask any question and I would do my best to answer it!</p></div><!--<div class=\"mb-2 text-right\">\n                    <p class=\"bg-blue-500 text-white rounded-lg py-2 px-4 inline-block\">this example of chat</p>\n                  </div>--></div><form hx-post=\"/sendChatMessage/\" hx-target=\"this\" hx-swap=\"outerHTML\" class=\"p-4 border-t flex\"><input id=\"user-input\" name=\"message\" type=\"text\" placeholder=\"Type a message\" class=\"w-full px-3 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500\"> <button id=\"send-button\" class=\"bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 transition duration-300\">Send</button></form><!--\n                <form \n                    <input type=\"text\" id=\"name\" name=\"username\"/><br/>\n                    <button type=\"submit\">Look for a game!</button>\n                  </form>--></div></div><script>\n    //const chatbox = document.getElementById(\"chatbox\");\n    const chatContainer = document.getElementById(\"chat-container\");\n    /*const userInput = document.getElementById(\"user-input\");\n    const sendButton = document.getElementById(\"send-button\");*/\n    const openChatButton = document.getElementById(\"open-chat\");\n    const closeChatButton = document.getElementById(\"close-chat\");\n    \n    // Function to toggle the chatbox visibility\n    function toggleChatbox() {\n        chatContainer.classList.toggle(\"hidden\");\n    }\n    \n    // Add an event listener to the open chat button\n    openChatButton.addEventListener(\"click\", toggleChatbox);\n    \n    // Add an event listener to the close chat button\n    closeChatButton.addEventListener(\"click\", toggleChatbox);\n    \n    // Add an event listener to the send button\n    /*sendButton.addEventListener(\"click\", function () {\n        const userMessage = userInput.value;\n        if (userMessage.trim() !== \"\") {\n            addUserMessage(userMessage);\n            respondToUser(userMessage);\n            userInput.value = \"\";\n        }\n    });\n    \n    userInput.addEventListener(\"keyup\", function (event) {\n        if (event.key === \"Enter\") {\n            const userMessage = userInput.value;\n            addUserMessage(userMessage);\n            respondToUser(userMessage);\n            userInput.value = \"\";\n        }\n    });\n    \n    function addUserMessage(message) {\n        const messageElement = document.createElement(\"div\");\n        messageElement.classList.add(\"mb-2\", \"text-right\");\n        messageElement.innerHTML = `<p class=\"bg-blue-500 text-white rounded-lg py-2 px-4 inline-block\">${message}</p>`;\n        chatbox.appendChild(messageElement);\n        chatbox.scrollTop = chatbox.scrollHeight;\n    }\n    \n    function addBotMessage(message) {\n        const messageElement = document.createElement(\"div\");\n        messageElement.classList.add(\"mb-2\");\n        messageElement.innerHTML = `<p class=\"bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block\">${message}</p>`;\n        chatbox.appendChild(messageElement);\n        chatbox.scrollTop = chatbox.scrollHeight;\n    }\n    \n    function respondToUser(userMessage) {\n        // Replace this with your chatbot logic\n        setTimeout(() => {\n            addBotMessage(\"This is a response from the chatbot.\");\n        }, 500);\n    }*/\n    </script>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"mb-2 text-right\"><p class=\"bg-blue-500 text-white rounded-lg py-2 px-4 inline-block\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var2 string
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(message)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/chat.templ`, Line: 5, Col: 85}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p></div><div class=\"mb-2\"><p class=\"bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(answer)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/chat.templ`, Line: 8, Col: 87}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p></div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if !templ_7745c5c3_IsBuffer {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
+		}
+		return templ_7745c5c3_Err
+	})
+}
+
+func Chat() templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+		if !templ_7745c5c3_IsBuffer {
+			templ_7745c5c3_Buffer = templ.GetBuffer()
+			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var4 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var4 == nil {
+			templ_7745c5c3_Var4 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"fixed bottom-0 right-10 mb-4 mr-4\"><button id=\"open-chat\" title=\"Contact Sale\" class=\"fixed z-90 bottom-10 right-8 bg-blue-600 w-20 h-20 rounded-full drop-shadow-lg\n            flex justify-center items-center text-white text-4xl hover:bg-blue-700 hover:drop-shadow-2xl\n            hover:animate-bounce duration-300\"><svg class=\"w-10 h-10 lg:w-12 lg:h-12 xl:w-16 xl:h-16\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z\" clip-rule=\"evenodd\"></path></svg></button></div><div id=\"chat-container\" class=\"hidden fixed bottom-16 right-4 w-96\"><div class=\"bg-white shadow-md rounded-lg max-w-lg w-full\"><div class=\"p-4 border-b bg-blue-500 text-white rounded-t-lg flex justify-between items-center\"><p class=\"text-lg font-semibold\">Gazu Bot</p><button id=\"close-chat\" class=\"text-gray-300 hover:text-gray-400 focus:outline-none focus:text-gray-400\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"w-6 h-6\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M6 18L18 6M6 6l12 12\"></path></svg></button></div><div id=\"chatbox\" class=\"p-4 h-80 overflow-y-auto\"><!-- Chat messages--><div class=\"mb-2\"><p class=\"bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block\">Hello, my name is Gazu. I am ChatBot!<br>Please ask any question and I would do my best to answer it!</p></div></div><form hx-post=\"/sendChatMessage/\" hx-target=\"#chatbox\" hx-swap=\"beforeend\" class=\"p-4 border-t flex\"><input id=\"user-input\" name=\"message\" type=\"text\" placeholder=\"Type a message\" class=\"w-full px-3 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500\"> <button id=\"send-button\" class=\"bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 transition duration-300\">Send</button></form></div></div><script>\n    const chatContainer = document.getElementById(\"chat-container\");\n    const openChatButton = document.getElementById(\"open-chat\");\n    const closeChatButton = document.getElementById(\"close-chat\");\n    \n    // Function to toggle the chatbox visibility\n    function toggleChatbox() {\n        chatContainer.classList.toggle(\"hidden\");\n    }\n    \n    // Add an event listener to the open chat button\n    openChatButton.addEventListener(\"click\", toggleChatbox);\n    \n    // Add an event listener to the close chat button\n    closeChatButton.addEventListener(\"click\", toggleChatbox);\n    \n    </script>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if !templ_7745c5c3_IsBuffer {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
+		}
+		return templ_7745c5c3_Err
+	})
+}
+
+func ErrorMessage(errorMessage string) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+		if !templ_7745c5c3_IsBuffer {
+			templ_7745c5c3_Buffer = templ.GetBuffer()
+			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var5 == nil {
+			templ_7745c5c3_Var5 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script>\n        alert({ errorMessage });\n    </script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

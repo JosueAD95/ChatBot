@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"net/http"
 
 	view "github.com/keiko30/chatbot/view"
@@ -12,5 +11,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func ResponseMessage(w http.ResponseWriter, r *http.Request) {
-	fmt.Print(r.PostFormValue("message"))
+	message := r.PostFormValue("message")
+	if message == "" {
+		w.Header().Set("x-missing-field", "message")
+		w.WriteHeader(http.StatusLengthRequired)
+		return
+	}
+	view.Message(message, "Test answer").Render(r.Context(), w)
 }
