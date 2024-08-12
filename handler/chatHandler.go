@@ -2,7 +2,9 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
+	db "github.com/keiko30/chatbot/db"
 	view "github.com/keiko30/chatbot/view"
 )
 
@@ -17,5 +19,20 @@ func ResponseMessage(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusLengthRequired)
 		return
 	}
-	view.Message(message, "Test answer").Render(r.Context(), w)
+	id, err := strconv.ParseUint(message, 10, 32)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	chat := db.GetQuestion(uint(id))
+	view.Message(chat).Render(r.Context(), w)
+}
+
+func GetQuestions(w http.ResponseWriter, r *http.Request) {
+	chats, err := db.GetQuestions()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	view.Questions(chats).Render(r.Context(), w)
 }

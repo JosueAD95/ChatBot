@@ -10,7 +10,12 @@ import "context"
 import "io"
 import "bytes"
 
-func Message(message string, answer string) templ.Component {
+import (
+	"fmt"
+	model "github.com/keiko30/chatbot/model"
+)
+
+func Message(chat model.Chat) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -28,9 +33,9 @@ func Message(message string, answer string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(message)
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(chat.Question)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/chat.templ`, Line: 5, Col: 85}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/chat.templ`, Line: 10, Col: 91}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -41,9 +46,9 @@ func Message(message string, answer string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(answer)
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(chat.Answer)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/chat.templ`, Line: 8, Col: 87}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/chat.templ`, Line: 13, Col: 92}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -73,7 +78,7 @@ func Chat() templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"fixed bottom-0 right-10 mb-4 mr-4\"><button id=\"open-chat\" title=\"Contact Sale\" class=\"fixed z-90 bottom-10 right-8 bg-blue-600 w-20 h-20 rounded-full drop-shadow-lg\n            flex justify-center items-center text-white text-4xl hover:bg-blue-700 hover:drop-shadow-2xl\n            hover:animate-bounce duration-300\"><svg class=\"w-10 h-10 lg:w-12 lg:h-12 xl:w-16 xl:h-16\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z\" clip-rule=\"evenodd\"></path></svg></button></div><div id=\"chat-container\" class=\"hidden fixed bottom-16 right-4 w-96\"><div class=\"bg-white shadow-md rounded-lg max-w-lg w-full\"><div class=\"p-4 border-b bg-blue-500 text-white rounded-t-lg flex justify-between items-center\"><p class=\"text-lg font-semibold\">Gazu Bot</p><button id=\"close-chat\" class=\"text-gray-300 hover:text-gray-400 focus:outline-none focus:text-gray-400\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"w-6 h-6\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M6 18L18 6M6 6l12 12\"></path></svg></button></div><div id=\"chatbox\" class=\"p-4 h-80 overflow-y-auto\"><!-- Chat messages--><div class=\"mb-2\"><p class=\"bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block\">Hello, my name is Gazu. I am ChatBot!<br>Please ask any question and I would do my best to answer it!</p></div></div><form hx-post=\"/sendChatMessage/\" hx-target=\"#chatbox\" hx-swap=\"beforeend\" class=\"p-4 border-t flex\"><input id=\"user-input\" name=\"message\" type=\"text\" placeholder=\"Type a message\" class=\"w-full px-3 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500\"> <button id=\"send-button\" class=\"bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 transition duration-300\">Send</button></form></div></div><script>\n    const chatContainer = document.getElementById(\"chat-container\");\n    const openChatButton = document.getElementById(\"open-chat\");\n    const closeChatButton = document.getElementById(\"close-chat\");\n    \n    // Function to toggle the chatbox visibility\n    function toggleChatbox() {\n        chatContainer.classList.toggle(\"hidden\");\n    }\n    \n    // Add an event listener to the open chat button\n    openChatButton.addEventListener(\"click\", toggleChatbox);\n    \n    // Add an event listener to the close chat button\n    closeChatButton.addEventListener(\"click\", toggleChatbox);\n    \n    </script>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"fixed bottom-0 right-10 mb-4 mr-4\"><button id=\"open-chat\" title=\"Contact Sale\" class=\"fixed z-90 bottom-10 right-8 bg-blue-600 w-20 h-20 rounded-full drop-shadow-lg\n            flex justify-center items-center text-white text-4xl hover:bg-blue-700 hover:drop-shadow-2xl\n            hover:animate-bounce duration-300\"><svg class=\"w-10 h-10 lg:w-12 lg:h-12 xl:w-16 xl:h-16\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z\" clip-rule=\"evenodd\"></path></svg></button></div><div id=\"chat-container\" class=\"hidden fixed bottom-16 right-4 w-96\"><div class=\"bg-white shadow-md rounded-lg max-w-lg w-full\"><div class=\"p-4 border-b bg-blue-500 text-white rounded-t-lg flex justify-between items-center\"><p class=\"text-lg font-semibold\">Gazu Bot</p><button id=\"close-chat\" class=\"text-gray-300 hover:text-gray-400 focus:outline-none focus:text-gray-400\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"w-6 h-6\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M6 18L18 6M6 6l12 12\"></path></svg></button></div><div id=\"chatbox\" class=\"p-4 h-80 overflow-y-auto\"><!-- Chat messages--><div class=\"mb-2\"><p class=\"bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block\">Hello, my name is Gazu. I am fun ChatBot!<br>Please ask any question and I would do my best to make you laught!</p></div></div><form hx-post=\"/sendChatMessage/\" hx-target=\"#chatbox\" hx-swap=\"beforeend\" class=\"p-4 border-t flex\" id=\"example-form\"><!--<input id=\"user-input\" name=\"message\" type=\"text\" placeholder=\"Type a message\" class=\"w-full px-3 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500\"></input>--><label for=\"underline_select\" class=\"sr-only\">Underline select</label> <select name=\"message\" id=\"underline_select\" class=\"block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer\" hx-get=\"/getQuestions/\" hx-target=\"this\" hx-swap=\"beforeend\" hx-trigger=\"load\" hx-on:htmx:validation:validate=\"\n                        if(this.value == &#39;Invalid&#39;) {\n                        this.setCustomValidity(&#39;Please enter a valid value&#39;) // set the validation error\n                        htmx.find(&#39;#example-form&#39;).reportValidity()          // report the issue\n                    }\"><option value=\"Invalid\" selected>Select a question!</option></select> <button id=\"send-button\" class=\"bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 transition duration-300\">Send</button></form></div></div><script>\n    const chatContainer = document.getElementById(\"chat-container\");\n    const openChatButton = document.getElementById(\"open-chat\");\n    const closeChatButton = document.getElementById(\"close-chat\");\n    \n    // Function to toggle the chatbox visibility\n    function toggleChatbox() {\n        chatContainer.classList.toggle(\"hidden\");\n    }\n    \n    // Add an event listener to the open chat button\n    openChatButton.addEventListener(\"click\", toggleChatbox);\n    \n    // Add an event listener to the close chat button\n    closeChatButton.addEventListener(\"click\", toggleChatbox);\n    \n    </script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -84,7 +89,7 @@ func Chat() templ.Component {
 	})
 }
 
-func ErrorMessage(errorMessage string) templ.Component {
+func Questions(chats []model.Chat) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -97,9 +102,37 @@ func ErrorMessage(errorMessage string) templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script>\n        alert({ errorMessage });\n    </script>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
+		for _, value := range chats {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<option value=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var6 string
+			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%d", value.ID))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/chat.templ`, Line: 88, Col: 51}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var7 string
+			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(value.Question)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/chat.templ`, Line: 88, Col: 70}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</option>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 		}
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)

@@ -23,7 +23,7 @@ func Index() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><script src=\"https://unpkg.com/htmx.org@1.9.6\"></script><!--HTMX--><!--<script src=\"https://unpkg.com/htmx.org/dist/ext/ws.js\"></script> HTMX Websocket--><link href=\"/dist/output.css\" rel=\"stylesheet\"><!--Tailwind--><script src=\"https://cdn.tailwindcss.com\"></script><title>Chatbot</title></head><body><!-- Dummy content --><div class=\"p-10\"><h1 class=\"text-4xl italic\">KindaCode.com</h1><h3 class=\"text-xl\">Some content here</h3></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><script src=\"https://unpkg.com/htmx.org@1.9.6\"></script><!--HTMX--><link href=\"/dist/output.css\" rel=\"stylesheet\"><!--Tailwind--><script src=\"https://cdn.tailwindcss.com\"></script><title>Chatbot</title></head><body><div class=\"text-center\"><h1 class=\"text-green-600 text-5xl\">Funny Chat Bot!</h1></div><div class=\"flex justify-center items-center pt-12\"><img src=\"https://img.freepik.com/premium-vector/funny-chat-bot-with-headphones-voice-support-service-virtual-assistant-ai-online-helper_687327-188.jpg\" alt=\"gfg\"></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
